@@ -9,7 +9,7 @@ Python爬虫，扫码登录京东网站，查询商品库存，价格，显示�
 + 2017-03-30 [Python2版实现二维码扫码登陆](https://github.com/Adyzng/jd-autobuy)
 + 2017-06-27 [Golang版JD_AutoBuy](https://github.com/Adyzng/go-jd)
 + 2019-07-26 重新实现自动购买下单，下单成功发送邮件提醒
-+ 2019-08-08 修复了重复添加购物车的bug  修复了和别的商品一起提交订单的bug
++ 2019-08-08 1.修复了重复添加购物车的bug  2.修复了和别的商品一起提交订单的bug
 
 
 ## 运行环境
