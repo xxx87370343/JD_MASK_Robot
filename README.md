@@ -27,7 +27,7 @@ Python 3
 ``` Python
 pip install requests
 pip install bs4
-pip install xlml
+pip install lxml
 ```
 
 
