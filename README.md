@@ -4,6 +4,9 @@
 Python爬虫，扫码登录京东网站，查询商品库存，价格，显示购物车详情等。<br/>
 可以指定抢购商品，自动购买下单，然后手动去京东付款就行。
 
+## 注意事项
+area_id 在浏览器里复制出来是以'-'连接的，请手动换成'_'连接
+
 ## 版本历史
 + 2017-03-30 [Python2版实现二维码扫码登陆](https://github.com/Adyzng/jd-autobuy)
 + 2017-06-27 [Golang版JD_AutoBuy](https://github.com/Adyzng/go-jd)
