@@ -51,39 +51,24 @@ optional arguments:
 
 ## 实例输出
 ``` python3 spider.py
+C:\Users\lly\Python\Python36\python.exe D:/PycharmProjects/spiders/京东库存爬虫/spider.py
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
-[ERROR] checkLogin: [Errno 2] No such file or directory: 'cookie'
-Fri Jul 26 10:32:25 2019 > 自动登录中... 
+Fri Sep 27 22:13:15 2019 > 自动登录中... 
+登录成功!
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Fri Jul 26 10:32:25 2019 > 请打开京东手机客户端，准备扫码登录:
-201 : 二维码未扫描，请扫描二维码
-201 : 二维码未扫描，请扫描二维码
-201 : 二维码未扫描，请扫描二维码
-201 : 二维码未扫描，请扫描二维码
-201 : 二维码未扫描，请扫描二维码
-201 : 二维码未扫描，请扫描二维码
-200 : AAEAMJO13YdPif0VLnrBInm9aLcfcVYeGu2_TEBgU0wTmLpTB3s_0a4s3Xw4YmsVCBYBDQ
-登录成功
+Fri Sep 27 22:13:16 2019 > 商品详情
+编号：100003923893
+库存：ож╩У
+价格：2999.00
+名称：黑鲨游戏手机2 Pro 12GB+128GB 风行蓝 骁龙855Plus UFS3.0 屏幕压感 极速触控 全面屏 双卡双待 4G全网通
+加入购物车链接：http://cart.jd.com/gate.action?pid=100003923893&pcount=1&ptype=1
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Fri Jul 26 10:32:50 2019 > 商品详情
-编号：5173441
-库存：�ֻ�
-价格：4477.00
-名称：Apple iPad Pro 平板电脑 10.5 英寸（64G WLAN+Cellular版/A10X MQFF2CH/A）玫瑰金色
-加入购物车链接：http://cart.jd.com/gate.action?pid=5173441&pcount=1&ptype=1
-商品已成功加入购物车！
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Fri Jul 26 10:32:52 2019 > 购物车明细
-购买    数量     价格        总价        商品
- +      1       ¥4477.00    ¥4477.00    Apple iPad Pro 平板电脑 10.5 英寸（64G WLAN+Cellular版/A10X MQFF2CH/A）玫瑰金色
-总数: 1
-总额: 4477.00
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Fri Jul 26 10:32:52 2019 > 订单详情
-应付款：￥4477.00
+Fri Sep 27 22:13:17 2019 > 订单详情
+应付款：￥2999.00
 收货人：李** 137****3886
-寄送至： 浙江 台州市 温岭市 **镇
-下单成功！订单号：100442880794
+寄送至： 浙江 台州市 温岭市 松门镇  *****
+{"overSea":false,"orderXml":null,"cartXml":null,"noStockSkuIds":"","reqInfo":null,"hasJxj":false,"addedServiceList":null,"sign":null,"pin":"jd_5e7c70b95c7bb","needCheckCode":false,"resultCode":0,"success":true,"orderId":103867893222,"submitSkuNum":1,"deductMoneyFlag":0,"goJumpOrderCenter":false,"payInfo":null,"scaleSkuInfoListVO":null,"purchaseSkuInfoListVO":null,"noSupportHomeServiceSkuList":null,"msgMobile":null,"addressVO":null,"msgUuid":null,"message":null}
+下单成功！订单号：103867893222
 请前往京东官方商城付款
 ```
 
