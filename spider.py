@@ -131,7 +131,7 @@ class JDSpider:
 
             # check if QR code scanned
             qr_ticket = None
-            retry_times = 100    # 尝试100次
+            retry_times = 100  # 尝试100次
             while retry_times:
                 retry_times -= 1
                 response = self.sess.get(
@@ -210,9 +210,9 @@ class JDSpider:
 
         params = {
             "skuIds": skuId,
-            "area": area_id,    # 收货地址id
+            "area": area_id,  # 收货地址id
             "type": "getstocks",
-            "_": int(time.time()*1000)
+            "_": int(time.time() * 1000)
         }
 
         headers = {"Referer": f"https://item.jd.com/{skuId}.html",
@@ -289,7 +289,7 @@ class JDSpider:
     def buy(self, options):
         # good detail
         good_data = self.good_detail(options.good, options.area)
-        if good_data['stock'] != 33:    # 如果没有现货
+        if good_data['stock'] != 33:  # 如果没有现货
             # flush stock state
             while good_data['stock'] != 33 and options.flush:
                 print(good_data['stock'], good_data['name'])
@@ -298,7 +298,7 @@ class JDSpider:
                                                                              area_id=options.area)
 
         cart_link = good_data['cart_link']
-        if cart_link == '':    # 如果有货, 但是没有购物车链接
+        if cart_link == '':  # 如果有货, 但是没有购物车链接
             print("没有购物车链接")
             return False
 
@@ -306,21 +306,21 @@ class JDSpider:
         self.cancelAllItem(options.area)
         try:
             # change buy count
-            cart_info_dict = self.cart_detail()    # 先获取购物车的信息
-            if options.good in cart_info_dict.keys():    # 如果之前添加过购物车了
+            cart_info_dict = self.cart_detail()  # 先获取购物车的信息
+            if options.good in cart_info_dict.keys():  # 如果之前添加过购物车了
                 self.change_num(options.count,
                                 cart_info_dict[options.good]['verderid'],
                                 options.good,
                                 options.area)
 
-            else:    # 如果没有添加过购物车
+            else:  # 如果没有添加过购物车
                 if options.count != 1:
                     cart_link = cart_link.replace('pcount=1', 'pcount={0}'.format(options.count))
                 response = self.sess.get(cart_link, cookies=self.cookies)
                 soup = BeautifulSoup(response.text, "lxml")
                 tag = soup.find("h3", class_='ftx-02')
                 if tag:
-                    print(tag.text)    # 商品已成功加入购物车！
+                    print(tag.text)  # 商品已成功加入购物车！
                 else:
                     print('添加到购物车失败')
                     return False
@@ -342,10 +342,10 @@ class JDSpider:
         cart_info_dict = dict()
 
         for item in soup.find_all(class_='item-item'):
-            skuid = item['skuid']    # 商品sku
+            skuid = item['skuid']  # 商品sku
             count = int(item['num'])  # 数量
-            venderid = item['venderid']    # 商家id
-            good_name = item.find('img')['alt']    # 商品名称
+            venderid = item['venderid']  # 商家id
+            good_name = item.find('img')['alt']  # 商品名称
 
             cart_info_dict[skuid] = {'count': count, 'verderid': venderid, 'good_name': good_name}
 
@@ -371,12 +371,12 @@ class JDSpider:
         soup = BeautifulSoup(rs.text, "lxml")
 
         # order summary
-        payment = soup.find(id='sumPayPriceId').text    # TODO
+        payment = soup.find(id='sumPayPriceId').text  # TODO
         detail = soup.find(class_='fc-consignee-info')
 
         if detail:
-            snd_usr = detail.find(id='sendMobile').text    # 收货人
-            snd_add = detail.find(id='sendAddr').text      # 收货地址
+            snd_usr = detail.find(id='sendMobile').text  # 收货人
+            snd_add = detail.find(id='sendAddr').text  # 收货地址
 
             print('应付款：{0}'.format(payment))
             print(snd_usr)
@@ -396,13 +396,13 @@ class JDSpider:
 
         data = {
             'overseaPurchaseCookies': '',
-            'vendorRemarks': [],    # 貌似是订单备注    [{"venderId":"632952","remark":""}]
-            'submitOrderParam.sopNotPutInvoice': sopNotPutInvoice,    # 货票分离开关值  false or true
-            'submitOrderParam.trackID': 'TestTrackId',    # 写死
+            'vendorRemarks': [],  # 貌似是订单备注    [{"venderId":"632952","remark":""}]
+            'submitOrderParam.sopNotPutInvoice': sopNotPutInvoice,  # 货票分离开关值  false or true
+            'submitOrderParam.trackID': 'TestTrackId',  # 写死
             'submitOrderParam.get_ignorePriceChange': ignorePriceChange,
-            'submitOrderParam.btSupport': btSupport,    # 是否支持白条
-            'submitOrderParam.eid': self.eid,    # 设备id
-            'submitOrderParam.fp': self.fp,      # ?
+            'submitOrderParam.btSupport': btSupport,  # 是否支持白条
+            'submitOrderParam.eid': self.eid,  # 设备id
+            'submitOrderParam.fp': self.fp,  # ?
             'riskControl': riskControl,
             'submitOrderParam.jxj': jxj,
             'submitOrderParam.trackId': 'cc46bf84f6274988c7cde62fce0cc11a',
@@ -410,7 +410,7 @@ class JDSpider:
         # print(data)
         order_url = 'http://trade.jd.com/shopping/order/submitOrder.action'
         rp = self.sess.post(order_url, data=data, cookies=self.cookies, headers={
-            'Referer': 'https://trade.jd.com/shopping/order/getOrderInfo.action?rid='+payload['rid'],
+            'Referer': 'https://trade.jd.com/shopping/order/getOrderInfo.action?rid=' + payload['rid'],
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36',
         })
         print(rp.text)
@@ -429,7 +429,6 @@ class JDSpider:
                     time.sleep(1)
         else:
             print('请求失败. StatusCode:', rp.status_code)
-
 
         return False
 
@@ -450,11 +449,11 @@ class JDSpider:
             'pid': pid,
             'pcount': num,
             'ptype': '1',
-            'targetId':    '0',
-            'promoID':    '0',
+            'targetId': '0',
+            'promoID': '0',
             'outSkus': '',
-                'random':    random.random(),
-                'locationId':   locationId,
+            'random': random.random(),
+            'locationId': locationId,
         }
         res = self.sess.post(url, data=data, cookies=self.cookies)
         assert res.status_code == 200
@@ -517,6 +516,21 @@ def send_email(subject, message):
             logging.error(e)
 
 
+def should_monitor(clock):
+    if clock == '':
+        return True
+    else:
+        [sys_hour, sys_min, sys_sec] = map(int, time.strftime('%H:%M:%S').split(':'))
+        [c_hour, c_min, c_sec] = map(int, clock.split(':'))
+        if sys_hour > c_hour:
+            return True
+        if sys_hour >= c_hour and sys_min > c_min:
+            return True
+        if sys_hour >= c_hour and sys_min >= c_min and sys_sec >= c_sec:
+            return True
+        return False
+
+
 if __name__ == '__main__':
 
     # help message
@@ -538,17 +552,26 @@ if __name__ == '__main__':
                         action='store_true',
                         help='Submit the order to Jing Dong',
                         default=True)
+    parser.add_argument('-t', '--timer',
+                        type=str,
+                        help='Set time to start monitoring. e.g. \"23:59:58\" , if no setting, start immediately',
+                        default="")
 
     options = parser.parse_args()
     # for test
     options.count = 1
     options.good = '100003923893'
     options.area = '15_1290_22049_22142'
+    options.timer = ""
 
-    spider = JDSpider()
-    if not spider.checkLogin():
-        if not spider.login_by_QR():
-            sys.exit(-1)
+    while True:
+        if should_monitor(options.timer):
+            spider = JDSpider()
+            if not spider.checkLogin():
+                if not spider.login_by_QR():
+                    sys.exit(-1)
 
-    while not spider.buy(options) and options.flush:
-        time.sleep(options.wait / 1000.0)
+            while not spider.buy(options) and options.flush:
+                time.sleep(options.wait / 1000.0)
+            continue
+        time.sleep(1)
