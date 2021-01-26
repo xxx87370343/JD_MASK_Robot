@@ -243,8 +243,9 @@ class JDSpider:
         }
         try:
             # 商品详情页
+            print(f'{skuId} > 商品详情页:')
             detail_link = f"https://item.jd.com/{skuId}.html"
-            response = requests.get(detail_link)
+            response = requests.get(detail_link, cookies=self.cookies)
             soup = BeautifulSoup(response.text, "lxml")
             # 产品名称
             name = soup.find('div', class_="sku-name").text.strip()
@@ -560,7 +561,7 @@ if __name__ == '__main__':
     options = parser.parse_args()
     # for test
     options.count = 1
-    options.good = '100010617232'
+    # options.good = '100010617232'
     options.area = '15_1290_22049_22142'
     options.timer = ""
 
